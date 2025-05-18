@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   return (
-    <AppBar position="fixed" color="primary" mt={0} pt={0}>
+    <AppBar position="fixed" color="primary">
       <Container maxWidth="xl">
       <Toolbar disableGutters>
         <Typography variant="h6" component={RouterLink} to="/" sx={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>

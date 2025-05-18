@@ -1,5 +1,5 @@
 // src/App.tsx
-import React from 'react';
+// import React from 'react';
 // import { Container, } from '@mui/material';
 
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,7 +13,6 @@ const App: React.FC = () => {
       <CssBaseline />
         <Navbar />
         <AppRoutes />
-
     </>
   );
 };
