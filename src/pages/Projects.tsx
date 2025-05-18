@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   Box,
-  Grid,
   Typography,
   Card,
   CardContent,
@@ -10,7 +9,9 @@ import {
   Button,
   Chip,
   Stack,
+  Grid
 } from '@mui/material';
+
 
 type Project = {
   title: string;
@@ -57,7 +58,7 @@ const Projects: React.FC = () => {
 
       <Grid container spacing={3}>
         {projects.map((project, index) => (
-          <Grid item xs={12} md={6} key={index}>
+          <Grid size={{xs:12, md: 6 }}  key={index}>
             <Card elevation={3}>
               <CardContent>
                 <Typography variant="h6" gutterBottom>
@@ -84,16 +85,18 @@ const Projects: React.FC = () => {
                       GitHub
                     </Button>
                   )}
-                  {project.demo && (
+                  {
+                  project.demo && (
                     <Button
                       size="small"
                       color="secondary"
-                      href={project.demo}
+                       href="#"
                       target="_blank"
                     >
                       Live Demo
                     </Button>
-                  )}
+                  )
+                  }
                 </CardActions>
               )}
             </Card>

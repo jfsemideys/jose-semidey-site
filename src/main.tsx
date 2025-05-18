@@ -6,7 +6,7 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-     <BrowserRouter>
+     <BrowserRouter basename="https://jfsemideys.github.io/jose-semidey-site/">
       <App />
     </BrowserRouter>
   </StrictMode>,

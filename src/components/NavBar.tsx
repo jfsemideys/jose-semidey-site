@@ -3,7 +3,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, Container } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-const Navbar: React.FC = () => {
+const NavBar: React.FC = () => {
   return (
     <AppBar position="fixed" color="primary">
       <Container maxWidth="xl">
@@ -23,4 +23,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;
