@@ -1,0 +1,18 @@
+export const skills: string[] = [
+    'React',
+    'TypeScript',
+    'Material UI',
+    'Redux',
+    'C#',
+    '.NET Core',
+    'Azure',
+    'AWS',
+    'Entity Framework',
+    'SQL Server',
+    'PostgreSQL',
+    'Docker',
+    'CI/CD',
+    'Selenium',
+    'Python',
+    'GO',
+]

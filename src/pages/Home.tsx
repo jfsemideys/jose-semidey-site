@@ -21,6 +21,7 @@ const Home: React.FC = () => {
         gap: 4,
       }}
     >
+      
       <Typography variant="h2" component="h1" fontWeight={700}>
         Hi, I'm Jose Semidey
       </Typography>

@@ -1,5 +1,7 @@
 // src/pages/Resume.tsx
 import React from 'react';
+import {experience} from '../data/experience';
+import { skills } from '../data/skills';
 import {
   Box,
   Typography,
@@ -14,12 +16,24 @@ import {
 
 const Resume: React.FC = () => {
   return (
-    <Box sx={{ py: 4 }}>
-      <Typography variant="h4" component="h2" gutterBottom fontWeight="bold">
-        Resume
-      </Typography>
-
+    <Box sx={{ py: 15, px: 2 }}>
+      <Box sx={{display: 'flex', justifyContext: 'center', alignItems:'center', flexDirection: 'column' }}>
+        <Typography variant="h4" component="h2" gutterBottom fontWeight="bold">
+        Jose Semidey 
+        </Typography>
+        <Typography variant="h6" component="h2" fontWeight="bold">
+        jfsemideys@gmail.com | 315-854-5189
+        </Typography>
+        <Typography variant="h6" component="h2" fontWeight="bold">
+        www.linkedin.com/in/jose-semidey-5b53387
+        </Typography>
+        <Typography variant="h6" component="h2" fontWeight="bold">
+        https://jfsemideys.github.io/jose-semidey-site/
+        </Typography>
+      </Box>
+      
       {/* Education */}
+      <Box sx={{display: 'flex', justifyContext: 'center', alignItems:'center', flexDirection: 'column' }}>
       <Typography variant="h5" sx={{ mt: 4 }}>
         Education
       </Typography>
@@ -43,60 +57,7 @@ const Resume: React.FC = () => {
       </Typography>
       <Divider sx={{ mb: 2 }} />
       <List>
-        {[
-          {
-            title: 'Senior Software Developer',
-            company: 'Vanco',
-            dates: 'June 2022 – Present',
-            location: 'Remote',
-            description: [
-              'Developed and maintained applications for managing donation campaigns.',
-              'Used React Hooks and .NET/C# to deliver new features.',
-              'Integrated Azure services like Cosmos DB and Blob Storage.',
-            ],
-          },
-          {
-            title: 'Senior Software Engineer',
-            company: 'TaxAct',
-            dates: 'Jan 2021 – May 2022',
-            location: 'Remote',
-            description: [
-              'Built authentication features (login, password recovery, MFA).',
-              'Used Angular, React, and .NET Core.',
-              'Collaborated with AWS infrastructure teams.',
-            ],
-          },
-          {
-            title: 'Software Engineer',
-            company: 'Chevron',
-            dates: 'Apr 2018 – Dec 2020',
-            location: 'Houston, TX',
-            description: [
-              'Created dashboards to manage IT infrastructure.',
-              'Optimized performance of frontend and backend systems.',
-            ],
-          },
-          {
-            title: 'Senior Software Developer',
-            company: 'Permian CC',
-            dates: 'Mar 2017 – Apr 2018',
-            location: 'Remote',
-            description: [
-              'Developed healthcare systems for scheduling and billing.',
-              'Modernized legacy systems using Angular and EF.',
-            ],
-          },
-          {
-            title: 'Software Developer',
-            company: 'Kestra Financial',
-            dates: 'Aug 2014 – Mar 2017',
-            location: 'Austin, TX',
-            description: [
-              'Worked on financial systems for account management.',
-              'Built APIs and integrated third-party services.',
-            ],
-          },
-        ].map((job, index) => (
+        {experience.map((job, index) => (
           <ListItem key={index} alignItems="flex-start" sx={{ mb: 2 }}>
             <ListItemText
               primary={
@@ -129,24 +90,7 @@ const Resume: React.FC = () => {
       </Typography>
       <Divider sx={{ mb: 2 }} />
       <Stack direction="row" spacing={1} flexWrap="wrap">
-        {[
-          'React',
-          'TypeScript',
-          'Material UI',
-          'Redux',
-          'C#',
-          '.NET Core',
-          'Azure',
-          'AWS',
-          'Entity Framework',
-          'SQL Server',
-          'PostgreSQL',
-          'Docker',
-          'CI/CD',
-          'Selenium',
-          'Python',
-          'GO',
-        ].map((skill) => (
+        {skills.map((skill) => (
           <Chip key={skill} label={skill} color="primary" variant="outlined" sx={{ mb: 1 }} />
         ))}
       </Stack>
@@ -161,6 +105,7 @@ const Resume: React.FC = () => {
         >
           Download PDF
         </Button>
+        </Box>
       </Box>
     </Box>
   );
