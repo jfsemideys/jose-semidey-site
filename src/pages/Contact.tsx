@@ -1,13 +1,7 @@
 // src/pages/Contact.tsx
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
-  Typography,
-  TextField,
-  Button,
-  Stack,
-  Alert,
-  Link,
 } from '@mui/material';
 import ContactForm from '../components/ContactForm';
 

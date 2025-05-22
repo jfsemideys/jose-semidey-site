@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import ResultMessage from './ResultMessage';
 
-
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
   email: Yup.string().email('Invalid email').required('Email is required'),
@@ -50,7 +49,7 @@ const ContactForm: React.FC = () => {
       onSubmit={formik.handleSubmit}
       sx={{ mx: 10, my:10, display: 'flex', flexDirection: 'column', gap: 2 }}
     >
-      <Typography variant="h5" fontWeight={600}>Contact Me {import.meta.env.VITE_API_EMAIL_TEMPLATE_KEY}</Typography>
+      <Typography variant="h5" fontWeight={600}>Contact Me</Typography>
       <Typography variant="body1" paragraph>
         Feel free to reach out via this form or directly at{' '}
         <Link href="mailto:jfsemideys@gmail.com">jfsemideys@gmail.com</Link>. You can also connect with me on{' '}
@@ -73,7 +72,12 @@ const ContactForm: React.FC = () => {
         value={formik.values.name}
         onChange={formik.handleChange}
         error={formik.touched.name && Boolean(formik.errors.name)}
-        helperText={formik.touched.name && formik.errors.name}
+        helperText={
+            formik.touched.name &&
+            typeof formik.errors.name === 'string'
+              ? formik.errors.name
+              : undefined
+          }
       />
 
       <TextField
@@ -84,7 +88,12 @@ const ContactForm: React.FC = () => {
         value={formik.values.email}
         onChange={formik.handleChange}
         error={formik.touched.email && Boolean(formik.errors.email)}
-        helperText={formik.touched.email && formik.errors.email}
+        helperText={
+            formik.touched.email &&
+            typeof formik.errors.email === 'string'
+              ? formik.errors.email
+              : undefined
+          }
       />
 
       <TextField
@@ -97,7 +106,12 @@ const ContactForm: React.FC = () => {
         value={formik.values.message}
         onChange={formik.handleChange}
         error={formik.touched.message && Boolean(formik.errors.message)}
-        helperText={formik.touched.message && formik.errors.message}
+        helperText={
+            formik.touched.message &&
+            typeof formik.errors.message === 'string'
+              ? formik.errors.message
+              : undefined
+          }
       />
       <Button color="primary" variant="contained" type="submit">
         Send Message
