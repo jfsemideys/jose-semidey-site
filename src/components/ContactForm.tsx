@@ -50,7 +50,7 @@ const ContactForm: React.FC = () => {
       onSubmit={formik.handleSubmit}
       sx={{ mx: 10, my:10, display: 'flex', flexDirection: 'column', gap: 2 }}
     >
-      <Typography variant="h5" fontWeight={600}>Contact Me</Typography>
+      <Typography variant="h5" fontWeight={600}>Contact Me {import.meta.env.VITE_API_EMAIL_TEMPLATE_KEY}</Typography>
       <Typography variant="body1" paragraph>
         Feel free to reach out via this form or directly at{' '}
         <Link href="mailto:jfsemideys@gmail.com">jfsemideys@gmail.com</Link>. You can also connect with me on{' '}
