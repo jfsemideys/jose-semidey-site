@@ -1,0 +1,5 @@
+export const summary: string = 
+    `Experienced Full-Stack Developer with a strong background in building and supporting scalable web applications. 
+    Expertise in React, Redux, C#, and .NET, with hands-on experience in cloud technologies (Azure, AWS), DevOps practices, and modern front-end frameworks. 
+    Proficient in developing both server-side and client-side applications, following best practices in agile environments. 
+    Committed to delivering high-quality, maintainable code. `;
