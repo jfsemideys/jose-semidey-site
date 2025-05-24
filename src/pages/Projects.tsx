@@ -6,7 +6,7 @@ import {
   Grid
 } from '@mui/material';
 
-import ProjectCard from '../components/ProjectCard';
+import ContentCard from '../components/ContentCard';
 import { projects } from '../data/projects';
 
 const Projects: React.FC = () => {
@@ -16,8 +16,8 @@ const Projects: React.FC = () => {
         Projects
       </Typography>
       <Grid container spacing={3}>
-        {projects.map((project) => (
-          <ProjectCard project={project} />
+        {projects.map((project, index) => (
+            <ContentCard key={`pr${index}`} content={project} />
         ))}
       </Grid>
     </Box>

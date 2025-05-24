@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 
   return (
     <Box px={5}
-    sx={{ py: 0,  
+    sx={{  
       display: 'flex', 
       flexDirection: 'column', 
       justifyContext:'center', 

@@ -1,18 +1,13 @@
-export type Project = {
-    title: string;
-    description: string;
-    tech: string[];
-    github?: string;
-    demo?: string;
-  };
+import type {Content} from '../data/types/content'
   
-  export const projects: Project[] = [
+  
+  export const projects: Content[] = [
     {
       title: 'Donation Management System',
       description:
         'Built for Vanco, this application allows users to manage, track, and analyze donation campaigns. Integrated with Azure Blob Storage and Cosmos DB.',
       tech: ['React', 'C#', '.NET Core', 'Azure'],
-      github: '',
+      link: '',
     },
     {
       title: 'Authentication System',

@@ -1,7 +1,7 @@
 // src/pages/Articles.tsx
 import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
-import ArticleCard from '../components/ArticleCard';
+import ContentCard from '../components/ContentCard';
 import {articles} from '../data/articles';
 
 const Articles: React.FC = () => (
@@ -11,7 +11,7 @@ const Articles: React.FC = () => (
   </Typography>
   <Grid container spacing={3}>
     {articles.map((article) => (
-      <ArticleCard article={article} />
+      <ContentCard content={article} />
     ))}
   </Grid>
 </Box>

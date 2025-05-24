@@ -13,59 +13,54 @@ import {
   Avatar
 } from '@mui/material';
 
-type Project = {
-    title: string;
-    description: string;
-    tech: string[];
-    github?: string;
-    demo?: string;
+import type {Content} from '../data/types/content';
+  
+type ContentCardCardProps = {
+    content: Content;
   };
 
-  type ProjectCardProps = {
-    project: Project;
-  };
-
-const ProjectCard: React.FC<ProjectCardProps> = ({project}) => {
-  // const {project} = props;
-    const projectFirstLetter = project.title[0]
+const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
+  
+    const {title, description, tech, linkName, link, demo} = content;
+    const titleFirstLetter = content.title[0]
     return (
-        <Grid size={{xs:12, md: 6 }}  key={project.title}>
+        <Grid size={{xs:12, md: 6 }}  key={content.title}>
             <Card elevation={3}>
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: 'blue' }} aria-label="recipe">
-                    {projectFirstLetter}
+                    {titleFirstLetter}
                   </Avatar>
                 }
                 title={ 
                   <Typography variant="h5" gutterBottom>
-                    {project.title}
+                    {title}
                   </Typography> }
               />
               <CardContent>
                 <Typography variant="body1" color="text.secondary" paragraph>
-                  {project.description}
+                  {description}
                 </Typography>
                 <Stack direction="row" spacing={1} flexWrap="wrap">
-                  {project.tech.map((tech: string) => (
+                  {tech && tech.map((tech: string) => (
                     <Chip key={tech} label={tech} size="small" sx={{ mb: 1 }} />
                   ))}
                 </Stack>
               </CardContent>
-              {(project.github || project.demo) && (
+              {(link || demo) && (
                 <CardActions>
-                  {project.github && (
+                  {link && (
                     <Button
                       size="small"
                       color="primary"
-                      href={project.github}
+                      href={link}
                       target="_blank"
                     >
-                      GitHub
+                      {linkName}
                     </Button>
                   )}
                   {
-                  project.demo && (
+                  demo && (
                     <Button
                       size="small"
                       color="secondary"
@@ -83,4 +78,4 @@ const ProjectCard: React.FC<ProjectCardProps> = ({project}) => {
     );
 }
 
-export default ProjectCard;
+export default ContentCard;
