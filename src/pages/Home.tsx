@@ -7,20 +7,16 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Box ml={45}
-      sx={{
-        minHeight: '80vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        flexDirection: 'column',
-
-        placeItems: "center",
-        // minMidth: "320px !important",
-        gap: 4,
-      }}
-    >
+    <Box px={5}
+    sx={{ py: 0,  
+      display: 'flex', 
+      flexDirection: 'column', 
+      justifyContext:'center', 
+      alignItems:'center' ,
+      width: "100vw",
+      py:15
+      }}>
+    
       
       <Typography variant="h2" component="h1" fontWeight={700}>
         Hi, I'm Jose Semidey

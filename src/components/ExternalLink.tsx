@@ -1,6 +1,10 @@
 import React from 'react';
 
-const ExternalLink = ({ href, children }) => (
+export type ExternalLinkPros = {
+    href: string;
+    children: React.ReactNode;
+  };
+const ExternalLink: React.FC<ExternalLinkPros> = ({ href, children }) => (
   <a href={href} target="_blank" rel="noopener noreferrer">
     {children}
   </a>

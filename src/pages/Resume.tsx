@@ -4,6 +4,8 @@ import {personalInfo} from '../data/personalInfo'
 import {experience} from '../data/experience';
 import { summary } from '../data/summary';
 import { skills } from '../data/skills';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import {
   Box,
   Typography,
@@ -14,13 +16,14 @@ import {
   Chip,
   Stack,
   Button,
-  Link
 } from '@mui/material';
-import html2pdf from 'html2pdf.js';
+// import html2pdf from 'html2pdf-ts';
+// import html2pdf from 'html2pdf.js/dist/html2pdf.min.js';
+//import { HTML2PDFOptions } from '../src/types';
 import ExternalLink from '../components/ExternalLink';
 
 const Resume: React.FC = () => {
-  const resumeRef = useRef(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const {
     name,
@@ -30,17 +33,39 @@ const Resume: React.FC = () => {
     gitHubUrl
   } = personalInfo;
 
-  const handleDownload = () => {
-    const element = resumeRef.current;
-    const opt = {
-      margin:       0.5,
-      filename:     'jose semidey resume.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(element).save();
+  const handleDownload = async () => {
+    
+    if (!contentRef.current) return;
+
+    const element = contentRef.current;
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const margin = 10; // 10 mm margin
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pageWidth - 2 * margin;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    let position = margin;
+    let heightLeft = pdfHeight;
+
+    pdf.addImage(imgData, 'PNG', margin, position, pdfWidth, pdfHeight);
+    heightLeft -= pageHeight - 2 * margin;
+
+    while (heightLeft > 0) {
+      position = heightLeft - pdfHeight + margin;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', margin, position, pdfWidth, pdfHeight);
+      heightLeft -= pageHeight - 2 * margin;
+    }
+
+    pdf.save('jose-semidey-resume.pdf');
   };
+
   return (
     <Box sx={{ 
       py: 15,
@@ -54,7 +79,7 @@ const Resume: React.FC = () => {
           px: 2, 
         },
       }}>
-      <Box  ref={resumeRef}>
+      <Box  ref={contentRef}>
         <Box sx={{display: 'flex', justifyContext: 'center', alignItems:'center', flexDirection: 'column' }}>
           <Typography variant="h4" component="h2" gutterBottom fontWeight="bold">
             {name}
