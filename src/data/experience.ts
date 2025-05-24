@@ -8,10 +8,20 @@ export type Experience = {
   };
 
 export const experience: Experience[] = [
-    {
+  {
+    title: 'Senior Software Developer',
+    company: 'ProSphere',
+    dates: 'June 2023 – Present',
+    location: 'Remote',
+    description: [
+      'Developed and maintained backends, frontend and console applications for complains, subpoena, evidence tracking for supporting a agency.',
+      'Used React, .NET/C#,  to deliver new features.',
+      'Integrated Azure services like Cosmos DB and Blob Storage.',
+    ],
+  },{
       title: 'Senior Software Developer',
       company: 'Vanco',
-      dates: 'June 2022 – Present',
+      dates: 'June 2022 – Jun 2023',
       location: 'Remote',
       description: [
         'Developed and maintained applications for managing donation campaigns.',

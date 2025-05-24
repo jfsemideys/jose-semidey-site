@@ -17,9 +17,8 @@ import {
   Stack,
   Button,
 } from '@mui/material';
-// import html2pdf from 'html2pdf-ts';
-// import html2pdf from 'html2pdf.js/dist/html2pdf.min.js';
-//import { HTML2PDFOptions } from '../src/types';
+import ResumeBox from '../components/styled-components/ResumeBox';
+import ResumeHeader from '../components/styled-components/ResumeHeader';
 import ExternalLink from '../components/ExternalLink';
 
 const Resume: React.FC = () => {
@@ -67,20 +66,9 @@ const Resume: React.FC = () => {
   };
 
   return (
-    <Box sx={{ 
-      py: 15,
-      px: {
-        xs: 2,
-        sm: 10,
-        md: 20,
-        lg: 30,
-        },
-        '@media print': {
-          px: 2, 
-        },
-      }}>
+    <ResumeBox>
       <Box  ref={contentRef}>
-        <Box sx={{display: 'flex', justifyContext: 'center', alignItems:'center', flexDirection: 'column' }}>
+        <ResumeHeader>
           <Typography variant="h4" component="h2" gutterBottom fontWeight="bold">
             {name}
           </Typography>
@@ -97,9 +85,9 @@ const Resume: React.FC = () => {
               {gitHubUrl}
             </Typography>
            </ExternalLink>
-        </Box>
+        </ResumeHeader>
         <Box mt={3}>
-          <Typography variant="body1" component="h2" fontWeight="bold">
+          <Typography variant="body1" component="h3" fontWeight="bold" >
             {summary}
           </Typography>
           <Typography variant="h5" sx={{ mt: 4 }}>
@@ -135,7 +123,7 @@ const Resume: React.FC = () => {
           <Divider sx={{ mb: 2 }} />
           <List>
             {experience.map((job, index) => (
-              <ListItem key={index} alignItems="flex-start" sx={{ mb: 2 }}>
+              <ListItem key={index} alignItems="flex-start" sx={{ mb: 2, pageBreakInside: 'avoid',}}>
                 <ListItemText
                   primary={
                     <Typography variant="subtitle1" fontWeight="bold">
@@ -172,7 +160,7 @@ const Resume: React.FC = () => {
           </Button>
           </Box>
         </Box>
-    </Box>
+    </ResumeBox>
   );
 };
 

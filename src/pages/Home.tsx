@@ -1,23 +1,17 @@
 // src/pages/Home.tsx
 import React from 'react';
-import { Typography, Box, Button, Stack } from '@mui/material';
+import SBox from '../components/styled-components/SBox'
+import { Typography, Button, Stack } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <Box px={5}
-    sx={{  
-      display: 'flex', 
-      flexDirection: 'column', 
-      justifyContext:'center', 
-      alignItems:'center' ,
-      width: "100vw",
-      py:15
-      }}>
-    
-      
+    <SBox
+      sx={{ py:15}}
+    >
       <Typography variant="h2" component="h1" fontWeight={700}>
         Hi, I'm Jose Semidey
       </Typography>
@@ -42,7 +36,7 @@ const Home: React.FC = () => {
           Contact Me
         </Button>
       </Stack>
-    </Box>
+    </SBox>
   );
 };
 

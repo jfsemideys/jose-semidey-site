@@ -58,63 +58,61 @@ const Navbar: React.FC = () => {
       <AppBar position="fixed" color="primary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-          <Box
-    component="img"
-    src={logo}
-    alt="JS Logo"
-    sx={{
-      height: 32,
-      width: 32,
-      mr: 1,
-    }}
-  />
-            <Typography
-              variant="h6"
-              component={RouterLink}
-              to="/"
+            <Box
+              component="img"
+              src={logo}
+              alt="JS Logo"
               sx={{
-                textDecoration: 'none',
-                color: 'inherit',
-                flexGrow: 1,
-                fontWeight: 600,
+                height: 32,
+                width: 32,
+                mr: 1,
               }}
-            >
-              Jose Semidey
-            </Typography>
-
-            {isMobile ? (
-              <IconButton
-                edge="end"
-                color="inherit"
-                aria-label="menu"
-                onClick={handleDrawerToggle}
+            />
+              <Typography
+                variant="h6"
+                component={RouterLink}
+                to="/"
+                sx={{
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  flexGrow: 1,
+                  fontWeight: 600,
+                }}
               >
-                <MenuIcon />
-              </IconButton>
-            ) : (
-              <Box sx={{ display: 'flex', gap: 1 }}>
-                {navItems.map((item) => (
-                  <Button
-                    key={item.to}
-                    color="inherit"
-                    component={RouterLink}
-                    to={item.to}
-                  >
-                    {item.label}
-                  </Button>
-                ))}
-              </Box>
-            )}
-          </Toolbar>
-        </Container>
+                Jose Semidey
+              </Typography>
+              {isMobile ? (
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={handleDrawerToggle}
+                >
+                  <MenuIcon />
+                </IconButton>
+              ) : (
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  {navItems.map((item) => (
+                    <Button
+                      key={item.to}
+                      color="inherit"
+                      component={RouterLink}
+                      to={item.to}
+                    >
+                      {item.label}
+                    </Button>
+                  ))}
+                </Box>
+              )}
+            </Toolbar>
+          </Container>
       </AppBar>
-
       <Drawer
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile
+          keepMounted: true,
         }}
       >
         {drawer}

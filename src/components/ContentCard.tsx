@@ -24,7 +24,7 @@ const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
     const {title, description, tech, linkName, link, demo} = content;
     const titleFirstLetter = content.title[0]
     return (
-        <Grid size={{xs:12, md: 6 }}  key={content.title}>
+        <Grid size={{xs:12, md: 4 }}  key={content.title}>
             <Card elevation={3}>
               <CardHeader
                 avatar={

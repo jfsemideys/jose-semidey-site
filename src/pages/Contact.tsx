@@ -1,21 +1,12 @@
 // src/pages/Contact.tsx
 import React from 'react';
-import {
-  Box,
-} from '@mui/material';
+import SBox from '../components/styled-components/SBox';
 import ContactForm from '../components/ContactForm';
 
 const Contact: React.FC = () => (
-   <Box 
-      sx={{ py: 0,  
-      display: 'flex', 
-      flexDirection: 'column', 
-      justifyContext:'center', 
-      alignItems:'center' ,
-      width: "100vw"
-      }}>
+   <SBox>
     <ContactForm />
-   </Box>
+   </SBox>
 );
 
 export default Contact;
