@@ -55,7 +55,7 @@ import type {Content} from '../data/types/content'
       title: 'Synchonize Users',
       description:
         'A nightly batch job to take the users for one application and create or update the second application',
-      tech: ['C#', '.NET Core', 'ServiceNow', 'SqlServer'],
+      tech: ['C#', '.NET Core', 'ServiceNow', 'SqlServer', 'Hangfire'],
       link: '',
       categoryId: 7,
     },

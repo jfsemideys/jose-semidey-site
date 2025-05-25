@@ -27,18 +27,3 @@ export const categoryColor: { [key: number]: string } = {
     11: '#1565c0',
     12: '#dd2c00',
 }
-
-export const skillColor: { [key: string]: string } = {
-    'React': '#4caf50',
-    'Angular': '#00695c',
-    '.NET Core': '#01579b', 
-    'AWS':'#1565c0',
-    'SqlServer': '#b71c1c',
-    'PostgreSQL': '#b71c1c',
-    'Linux': '#b71c1c',
-    'ServiceNow': '#b71c1c',
-    'Entity Framework': '#b71c1c',
-    'Bootstrap': '#b71c1c',
-    'Mui': '#b71c1c',
-    'Azure Functions': '#b71c1c',
-}

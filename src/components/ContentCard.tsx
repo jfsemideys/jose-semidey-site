@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 
 import type {Content} from '../data/types/content';
-import {categories, categoryColor, skillColor} from '../constants/appConstants'
+import {categories, categoryColor} from '../constants/appConstants'
   
 type ContentCardCardProps = {
     content: Content;
@@ -56,10 +56,9 @@ const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
                     variant="outlined"
                     sx={{ 
                       mb: 1,
-                      borderColor: skillColor[tech],
-                    borderWidth: 2,
+                      borderColor: 'navy',
+                      borderWidth: 2,
                       color:'#000'
-                    
                     }} />
                   ))}
                 </Stack>
