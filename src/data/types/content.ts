@@ -5,4 +5,5 @@ export type Content = {
     linkName?: string;
     link?: string;
     demo?: string;
+    categoryId: number;
   };

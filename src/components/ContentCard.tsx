@@ -10,10 +10,11 @@ import {
   Chip,
   Stack,
   Grid,
-  Avatar
+  Box
 } from '@mui/material';
 
 import type {Content} from '../data/types/content';
+import {categories, categoryColor, skillColor} from '../constants/appConstants'
   
 type ContentCardCardProps = {
     content: Content;
@@ -21,21 +22,26 @@ type ContentCardCardProps = {
 
 const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
   
-    const {title, description, tech, linkName, link, demo} = content;
-    const titleFirstLetter = content.title[0]
+    const {title, description, tech, linkName, link, demo, categoryId} = content;
+    console.log('categoryColor[categoryId]', categoryColor[categoryId])
     return (
         <Grid size={{xs:12, md: 4 }}  key={content.title}>
             <Card elevation={3}>
               <CardHeader
                 avatar={
-                  <Avatar sx={{ bgcolor: 'blue' }} aria-label="recipe">
-                    {titleFirstLetter}
-                  </Avatar>
-                }
+                  <Chip 
+                    label={categories[categoryId]} 
+                    sx={{
+                      color:'#fff',
+                      backgroundColor: categoryColor[categoryId]
+                    }} 
+                  />
+                } 
                 title={ 
-                  <Typography variant="h5" gutterBottom>
+                  <Box><Typography variant="h5" gutterBottom>
                     {title}
-                  </Typography> }
+                  </Typography>
+                  </Box> }
               />
               <CardContent>
                 <Typography variant="body1" color="text.secondary" paragraph>
@@ -43,7 +49,18 @@ const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
                 </Typography>
                 <Stack direction="row" spacing={1} flexWrap="wrap">
                   {tech && tech.map((tech: string) => (
-                    <Chip key={tech} label={tech} size="small" sx={{ mb: 1 }} />
+                    <Chip 
+                    key={tech} 
+                    label={tech} 
+                    size="small" 
+                    variant="outlined"
+                    sx={{ 
+                      mb: 1,
+                      borderColor: skillColor[tech],
+                    borderWidth: 2,
+                      color:'#000'
+                    
+                    }} />
                   ))}
                 </Stack>
               </CardContent>
