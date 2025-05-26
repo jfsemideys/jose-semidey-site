@@ -7,4 +7,5 @@ export type Content = {
     link?: string;
     demo?: string;
     categoryId: number;
+    details?: string[];
   };
