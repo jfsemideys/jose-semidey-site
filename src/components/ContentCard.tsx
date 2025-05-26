@@ -22,7 +22,7 @@ type ContentCardCardProps = {
 
 const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
   
-    const {title, description, tech, linkName, link, demo, categoryId} = content;
+    const {id, title, description, tech, linkName, link, demo, categoryId} = content;
     console.log('categoryColor[categoryId]', categoryColor[categoryId])
     return (
         <Grid size={{xs:12, md: 4 }}  key={content.title}>
@@ -63,30 +63,40 @@ const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
                   ))}
                 </Stack>
               </CardContent>
-              {(link || demo) && (
+              {(
                 <CardActions>
-                  {link && (
-                    <Button
-                      size="small"
-                      color="primary"
-                      href={link}
-                      target="_blank"
-                    >
-                      {linkName}
-                    </Button>
-                  )}
-                  {
-                  demo && (
-                    <Button
-                      size="small"
-                      color="secondary"
-                       href="#"
-                      target="_blank"
-                    >
-                      Live Demo
-                    </Button>
-                  )
+                    { 
+                      id && (
+                      <Button
+                        size="small"
+                        color="secondary"
+                        href={`projects/${id}`}
+                      >
+                        View Details
+                      </Button>)
                   }
+                  {
+                    link && (
+                      <Button
+                        size="small"
+                        color="primary"
+                        href={link}
+                        target="_blank"
+                      >
+                        {linkName}
+                      </Button>)
+                    }
+                    {
+                      demo && (
+                        <Button
+                          size="small"
+                          color="secondary"
+                          href="#"
+                          target="_blank"
+                        >
+                          Live Demo
+                        </Button>)
+                    }
                 </CardActions>
               )}
             </Card>

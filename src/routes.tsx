@@ -7,12 +7,14 @@ import Projects from './pages/Projects';
 import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import Articles from './pages/Articles';
+import ProjectDetails from './pages/ProjectDetails';
 
 const AppRoutes: React.FC = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/projects" element={<Projects />} />
+    <Route path="/projects/:id" element={<ProjectDetails />} />
     <Route path="/articles" element={<Articles />} />
     <Route path="/resume" element={<Resume />} />
     <Route path="/contact" element={<Contact />} />
