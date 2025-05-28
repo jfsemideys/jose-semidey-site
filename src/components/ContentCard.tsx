@@ -23,7 +23,7 @@ type ContentCardCardProps = {
 const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
   
     const {id, title, description, tech, linkName, link, demo, categoryId} = content;
-    console.log('categoryColor[categoryId]', categoryColor[categoryId])
+
     return (
         <Grid size={{xs:12, md: 4 }}  key={content.title}>
             <Card elevation={3}>
@@ -38,8 +38,18 @@ const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
                   />
                 } 
                 title={ 
-                  <Box><Typography variant="h5" gutterBottom>
-                    {title}
+                  <Box>
+                    <Typography 
+                        variant="h5" 
+                        gutterBottom
+                        sx={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'noWrap',
+                          width: 200
+                         }}
+                    >
+                      {title}
                   </Typography>
                   </Box> }
               />

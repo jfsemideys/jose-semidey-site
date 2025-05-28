@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import useEmail from '../hook/useEmail';
+
 import {
   TextField,
   Button,
@@ -10,6 +11,8 @@ import {
   Link,
 } from '@mui/material';
 import ResultMessage from './ResultMessage';
+import MathCaptcha from './MathCaptcha';
+
 
 const validationSchema = Yup.object({
   name: Yup.string().required('Name is required'),
@@ -20,6 +23,7 @@ const validationSchema = Yup.object({
 const ContactForm: React.FC = () => {
   const [severityMessage, setSeverityMessage] = useState('');
   const [resultMessage, setResultMessage] = useState('');
+  const [captchaValid, setCaptchaValid] = useState(false);
 
   const sendEmail = useEmail();
   const formik = useFormik({
@@ -30,11 +34,16 @@ const ContactForm: React.FC = () => {
     },
     validationSchema,
     onSubmit: async (values: { name: any; message: any; email: any; }) => {
+      if (!captchaValid) {
+        setSeverityMessage('error');
+        setResultMessage('Please solve the CAPTCHA');;
+        return;
+      }
       const response: string | any = await sendEmail(values.name, values.email, values.message);
-      console.log('response', response)
+
       if(response === 200) {
         setSeverityMessage('success');
-        setResultMessage('Message sent successfully!');;
+        setResultMessage('Message sent successfully!');
       } else {
         setSeverityMessage('error');
         setResultMessage('Error sending the message.');
@@ -79,7 +88,6 @@ const ContactForm: React.FC = () => {
               : undefined
           }
       />
-
       <TextField
         fullWidth
         id="email"
@@ -95,7 +103,6 @@ const ContactForm: React.FC = () => {
               : undefined
           }
       />
-
       <TextField
         fullWidth
         multiline
@@ -113,6 +120,9 @@ const ContactForm: React.FC = () => {
               : undefined
           }
       />
+       <Box mt={2} display="flex" justifyContent="center">
+       <MathCaptcha onValidate={setCaptchaValid} />
+      </Box>
       <Button color="primary" variant="contained" type="submit">
         Send Message
       </Button>

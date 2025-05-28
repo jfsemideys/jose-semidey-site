@@ -26,7 +26,7 @@ import type {Content} from '../data/types/content'
     },
     {
       id: 2,
-      title: 'Equipment..',
+      title: 'Equipment Management',
       description:
         'Allows manage the communication and security equipment in several building in different cities',
       tech: ['React', 'C#', '.NET Core', 'Entity Framework', 'Sql Server', 'MUI', 'Fomik', 'yup'],
@@ -37,7 +37,6 @@ import type {Content} from '../data/types/content'
         'The space section includes area, number of persons and workstations.',
         'Equipment section is divided in two tabs: Communication Equipments and Security Equipments',
         'On each equipment tab infomation about equipment type and quantity is in each space',
-
       ]
     },
     {
@@ -131,7 +130,7 @@ import type {Content} from '../data/types/content'
     },
     {
       id: 9,
-      title: 'Maintenance..',
+      title: 'Equipment Maintenance',
       description:
         'The application manages the maintenance of the equipments in facilities. It allows to track the maintenance of equipments in a given facility',
       tech: ['React', 'C#', '.NET Core', 'Entity Framework', 'Sql Server','NodeJs', 'Express'],
@@ -152,7 +151,7 @@ import type {Content} from '../data/types/content'
     },
     {
       id: 10,
-      title: 'Donation..',
+      title: 'Church Donation System',
       description:
         'Built for Vanco, this application allows users to manage, track, and analyze donation campaigns. Integrated with Azure Blob Storage and Cosmos DB.',
       tech: ['React', 'C#', '.NET Core', 'Azure', 'Sql Server'],
@@ -168,7 +167,7 @@ import type {Content} from '../data/types/content'
     },
     {
       id: 11,
-      title: 'Authentication System',
+      title: 'Users Authentication',
       description:
         'Created secure login, password recovery, and account features using Angular and React. Collaborated with AWS teams for cloud deployment.',
       tech: ['Vue', 'React', '.NET Core', 'AWS'],
@@ -184,7 +183,7 @@ import type {Content} from '../data/types/content'
     },
     {
       id: 12,
-      title: 'IT Infrastructure..',
+      title: 'IT Infrastructure Evaluation',
       description:
         'A performance-optimized dashboard for Chevron to manage IT resources, built with React, .NET Core, and Azure cloud functions.',
       tech: ['React', 'C#', 'Azure Functions', 'Typescript', 'Sql Server'],

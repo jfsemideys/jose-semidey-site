@@ -20,7 +20,7 @@ import {
 import ResumeBox from '../components/styled-components/ResumeBox';
 import ResumeHeader from '../components/styled-components/ResumeHeader';
 import ExternalLink from '../components/ExternalLink';
-
+import CheckedListItem from '../components/CheckedListItem';
 const Resume: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -126,7 +126,7 @@ const Resume: React.FC = () => {
               <ListItem key={index} alignItems="flex-start" sx={{ mb: 2, pageBreakInside: 'avoid',}}>
                 <ListItemText
                   primary={
-                    <Typography variant="subtitle1" fontWeight="bold">
+                    <Typography variant="body1" fontWeight="bold">
                       {job.title} @ {job.company}
                     </Typography>
                   }
@@ -135,13 +135,11 @@ const Resume: React.FC = () => {
                       <Typography variant="body2" color="text.secondary">
                         {job.dates} | {job.location}
                       </Typography>
-                      <ul>
-                        {job.description.map((point, i) => (
-                          <li key={i}>
-                            <Typography variant="body2">{point}</Typography>
-                          </li>
+                      <List>
+                        {job.description.map((text, i) => (
+                          <CheckedListItem text={text} key={`des-${i}`} />
                         ))}
-                      </ul>
+                      </List>
                     </>
                   }
                 />

@@ -8,6 +8,7 @@ import Resume from './pages/Resume';
 import Contact from './pages/Contact';
 import Articles from './pages/Articles';
 import ProjectDetails from './pages/ProjectDetails';
+import NotFoundPage from './pages/NoFoundPage';
 
 const AppRoutes: React.FC = () => (
   <Routes>
@@ -18,6 +19,7 @@ const AppRoutes: React.FC = () => (
     <Route path="/articles" element={<Articles />} />
     <Route path="/resume" element={<Resume />} />
     <Route path="/contact" element={<Contact />} />
+    <Route path="*" element={<NotFoundPage />} />
   </Routes>
 );
 

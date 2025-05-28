@@ -12,7 +12,7 @@ const useEmail = ()  => {
                 title: "Recruiter",
                 email: email,
                 });
-                console.log('response.ststue', response.status)
+   
                 return response.status;
         } catch(error) {
             console.log('error', error)

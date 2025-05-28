@@ -10,7 +10,7 @@ const ResultMessage: React.FC<ResultMessageProps> = ({message, severity}) => {
         ? (<><Alert severity='success' sx={{ mb: 2 }}>
             {message}
           </Alert></>)
-        : (<><Alert severity='success' sx={{ mb: 2 }}>
+        : (<><Alert severity='error' sx={{ mb: 2 }}>
             {message}
           </Alert></>)
    return response;
