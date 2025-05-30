@@ -12,6 +12,7 @@ import {
   Grid,
   Box
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import type {Content} from '../data/types/content';
 import {categories, categoryColor} from '../constants/appConstants'
@@ -80,7 +81,8 @@ const ContentCard: React.FC<ContentCardCardProps> = ({content}) => {
                       <Button
                         size="small"
                         color="secondary"
-                        href={`projects/${id}`}
+                        component={Link}
+                        to={`/projects/${id}`}
                       >
                         View Details
                       </Button>)

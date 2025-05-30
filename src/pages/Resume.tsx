@@ -21,6 +21,11 @@ import ResumeBox from '../components/styled-components/ResumeBox';
 import ResumeHeader from '../components/styled-components/ResumeHeader';
 import ExternalLink from '../components/ExternalLink';
 import CheckedListItem from '../components/CheckedListItem';
+import SchoolIcon from '@mui/icons-material/School';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+
 const Resume: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -91,7 +96,7 @@ const Resume: React.FC = () => {
             {summary}
           </Typography>
           <Typography variant="h5" sx={{ mt: 4 }}>
-            Skills
+           <BuildCircleIcon/> Skills
           </Typography>
           <Divider sx={{ mb: 2 }} />
           <Stack direction="row" spacing={1} flexWrap="wrap">
@@ -99,9 +104,8 @@ const Resume: React.FC = () => {
               <Chip key={skill} label={skill} color="primary" variant="outlined" sx={{ mb: 1 }} />
             ))}
           </Stack>
-          {/* Education */}
           <Typography variant="h5" sx={{ mt: 4 }}>
-            Education
+            <SchoolIcon /> Education
           </Typography>
           <Divider sx={{ mb: 2 }} />
             <List>
@@ -118,7 +122,7 @@ const Resume: React.FC = () => {
             </List>
           {/* Experience */}
           <Typography variant="h5" sx={{ mt: 4 }}>
-            Experience
+          <EngineeringIcon /> Experience
           </Typography>
           <Divider sx={{ mb: 2 }} />
           <List>
@@ -127,7 +131,7 @@ const Resume: React.FC = () => {
                 <ListItemText
                   primary={
                     <Typography variant="body1" fontWeight="bold">
-                      {job.title} @ {job.company}
+                     <EngineeringOutlinedIcon /> {job.title} @ {job.company}
                     </Typography>
                   }
                   secondary={
