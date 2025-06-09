@@ -23,10 +23,12 @@ const useResumePDF = (resumeName: string, icons?: { [key: string]: string }) => 
         const {name, email,  phone, linkedInUrl, gitHubUrl} = personalInfo;
         const ySpace = doc.getFontSize();
       
+        doc.setFont("helvetica", "bold"); 
+        doc.setFontSize(16);
         let textX = getStartCenteredText(name);
         doc.text(name, textX, textY);
         textY += ySpace;
- 
+        doc.setFontSize(12);
         const mailPhone = `${email} | ${phone}`;
 
         textX = getStartCenteredText(mailPhone)
@@ -51,13 +53,74 @@ const useResumePDF = (resumeName: string, icons?: { [key: string]: string }) => 
         doc.setFont("helvetica", "bold"); 
         doc.setFontSize(12);
        doc.text(text, marginLeft, textY, {maxWidth: marginRight - 20, align: 'left'});       
-   
+    }
+    const drawRoundedRect = (
+        doc: jsPDF,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        radius: number
+      ) => {
+        doc.roundedRect(x, y, width, height, radius, radius, 'S');
+      };
+
+      
+    const addSkills = (skills: string[]) => {
+        const paddingX = 6;
+        const paddingY = 4;
+        const gap = 5;
+        const radius = 6;
+        const xStart = marginLeft;
+        const maxWidth = doc.internal.pageSize.getWidth() - marginLeft * 2;
+        textY += 80;
+        let x = xStart;
+       
+        if (icons?.school) {
+            doc.addImage(icons?.skill, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
+            doc.text("SKILLS", marginLeft + iconWidth + gap, textY);
+          } else {
+            doc.text("SKILLS", marginLeft, textY);
+          }
+          
+        textY += 5;
+       
+        doc.line(marginLeft, textY, marginRight, textY, "S");
+        const fontSize = 10;
+        doc.setFontSize(fontSize);
+        textY += 5;
+        let y = textY;
+        skills.forEach((skill) => {
+            const textWidth = doc.getTextWidth(skill);
+            const chipWidth = textWidth + paddingX * 2;
+            const chipHeight = fontSize + paddingY * 2;
+
+            if (x + chipWidth > maxWidth) {
+                x = xStart;
+                y += chipHeight + 8;
+            }
+
+        // Draw rounded rectangle (like MUI Chip)
+        doc.setDrawColor(33, 150, 243); // blue border
+        doc.setLineWidth(0.5);
+        drawRoundedRect(doc, x, y, chipWidth, chipHeight, radius);
+
+        // Draw text centered inside the chip
+        doc.setTextColor(33, 150, 243);
+        doc.text(skill, x + paddingX, y + paddingY + fontSize * 0.75);
+
+        x += chipWidth + gap;
+    });
+
+        textY = y + fontSize + paddingY * 2; // Update for next section
     }
 
     const addEducation = (titles: string[]) => {
+        doc.setDrawColor(0, 0, 0); // b
+        doc.setTextColor(0, 0, 0);
         const ySpace = doc.getFontSize() + 10;
-        textY +=70;
-  
+        textY +=20;
+        doc.setFontSize(12);
         if (icons?.school) {
             doc.addImage(icons?.school, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
             doc.text("EDUCATION", marginLeft + iconWidth + gap, textY);
@@ -80,6 +143,7 @@ const useResumePDF = (resumeName: string, icons?: { [key: string]: string }) => 
         const ySpace = doc.getFontSize()+10;
         textY += 25;
         doc.setFont("helvetica", "bold"); 
+        doc.setFontSize(12);
         if (icons?.work) {
             doc.addImage(icons?.work, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
             doc.text("EXPERIENCE", marginLeft + iconWidth + gap, textY);
@@ -133,6 +197,7 @@ const useResumePDF = (resumeName: string, icons?: { [key: string]: string }) => 
     return{
         addHeader, 
         addSummary,
+        addSkills,
         addEducation,
         addExperience,
         save

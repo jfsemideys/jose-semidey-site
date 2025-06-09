@@ -8,12 +8,10 @@ import { summary } from '../data/summary';
 import { skills } from '../data/skills';
 import {
   Box,
-  Typography,
   Button,
 } from '@mui/material';
 import ResumeBox from '../components/styled-components/ResumeBox';
-import ResumeHeader from '../components/styled-components/ResumeHeader';
-import ExternalLink from '../components/ExternalLink';
+import ResumeHeader from '../components/ResumeHeader';
 import useResumePDF from '../hook/resumePDF';
 import ResumeSummary from '../components/ResumeSummary';
 import ResumeSkills from '../components/ResumeSkills';
@@ -23,6 +21,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 import { renderMuiIconToBase64 } from '../utils/renderMuiIconToBase64';
 
 const Resume: React.FC = () => {
@@ -45,11 +44,12 @@ const Resume: React.FC = () => {
       const school = await renderMuiIconToBase64(<SchoolIcon style={{ fontSize: 20 }} />);
       const work = await renderMuiIconToBase64(<EngineeringIcon style={{ fontSize: 20 }} />);
       const workOutlined = await renderMuiIconToBase64(<EngineeringOutlinedIcon style={{ fontSize: 20 }} />);
+      const skill = await renderMuiIconToBase64(<BuildCircleIcon style={{ fontSize: 20 }} />);
       const checkBox = await renderMuiIconToBase64( 
         <Box style={{ color: 'green', fontSize: 20 }}>
           <CheckBoxIcon sx={{ color: 'inherit', fontSize: 'inherit' }} />
         </Box>);
-      setIcons({ school, work, workOutlined, checkBox });
+      setIcons({ school, work, workOutlined, checkBox, skill });
     };
     loadIcons();
   }, []);
@@ -58,9 +58,10 @@ const Resume: React.FC = () => {
   const handleDownload = async () => {
     if (!resumePDF) return null;
 
-    const {addHeader, addSummary, addEducation, addExperience, save} = resumePDF;
+    const {addHeader, addSummary, addSkills, addEducation, addExperience, save} = resumePDF;
     addHeader(contactInfo);
     addSummary(summary);
+    addSkills(skills);
     addEducation(education);
     addExperience(experience);
     save();
@@ -70,24 +71,13 @@ const Resume: React.FC = () => {
   return (
     <ResumeBox>
       <Box  ref={contentRef}>
-        <ResumeHeader>
-          <Typography variant="h4" component="h2" gutterBottom fontWeight="bold">
-            {name}
-          </Typography>
-          <Typography variant="body1" component="h6" fontWeight="bold">
-            {email} | {phone}
-          </Typography>
-          <ExternalLink href={linkedInUrl}>
-            <Typography variant="body1" component="h6" fontWeight="bold">
-              {linkedInUrl}
-            </Typography>
-          </ExternalLink>
-          <ExternalLink href={gitHubUrl}>
-            <Typography variant="body1" component="h6" fontWeight="bold">
-              {gitHubUrl}
-            </Typography>
-           </ExternalLink>
-        </ResumeHeader>
+        <ResumeHeader
+          name={name}
+          email={email}
+          phone={phone}
+          linkedInUrl={linkedInUrl}
+          gitHubUrl={gitHubUrl}
+        />
         <Box mt={3}>
           <ResumeSummary
             summary={summary}
