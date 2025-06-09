@@ -2,206 +2,173 @@ import jsPDF from "jspdf";
 import type { Experience } from "../data/experience";
 import type { PersonalInfo } from "../data/types/personalInfo";
 
-const useResumePDF = (resumeName: string, icons?: { [key: string]: string }) => {
-    const doc = new jsPDF({
-        orientation: 'portrait',
-        unit: 'px',
-    });
-    const iconWidth = 10;
-    const iconHeight = 15;
-    const gap = 6;
-    const marginLeft = 30;
-    const subMarginLeft = marginLeft + 12;
-    const margingTop = 50;
-    let textY = margingTop;
-    const marginRight = doc.internal.pageSize.getWidth() - 30;
-    
-    const getStartCenteredText: number | any = (text: string) => 
-        (doc.internal.pageSize.getWidth() - doc.getTextWidth(text))/2
-    
-    const addHeader = (personalInfo: PersonalInfo | any) => {
-        const {name, email,  phone, linkedInUrl, gitHubUrl} = personalInfo;
-        const ySpace = doc.getFontSize();
-      
-        doc.setFont("helvetica", "bold"); 
-        doc.setFontSize(16);
-        let textX = getStartCenteredText(name);
-        doc.text(name, textX, textY);
-        textY += ySpace;
-        doc.setFontSize(12);
-        const mailPhone = `${email} | ${phone}`;
+const useResumePDF = (resumeName: string, icons?: Record<string, string>) => {
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'px' });
 
-        textX = getStartCenteredText(mailPhone)
-        doc.text(mailPhone, textX, textY);
-        textX = getStartCenteredText(linkedInUrl);
-        textY += ySpace;
-        doc.setTextColor(0, 0, 255)
-        doc.textWithLink(linkedInUrl, textX, textY, {
-            url: linkedInUrl,
-          });
-         
-        textX = getStartCenteredText(gitHubUrl);
-        textY += ySpace;
-        doc.textWithLink(gitHubUrl, textX, textY, {
-            url: gitHubUrl,
-          });     
+  // Layout Constants
+  const iconSize = { width: 10, height: 15 };
+  const gap = 6;
+  const marginLeft = 30;
+  const subMarginLeft = marginLeft + 12;
+  const marginTop = 50;
+  const marginRight = doc.internal.pageSize.getWidth() - marginLeft;
+
+  let textY = marginTop;
+
+  const centerTextX = (text: string) => (doc.internal.pageSize.getWidth() - doc.getTextWidth(text)) / 2;
+
+  const drawRoundedRect = (x: number, y: number, width: number, height: number, radius: number) => {
+    doc.roundedRect(x, y, width, height, radius, radius, 'S');
+  };
+
+  const addHeader = (personalInfo: PersonalInfo) => {
+    const { name, email, phone, linkedInUrl, gitHubUrl } = personalInfo;
+    const yStep = doc.getFontSize();
+
+    doc.setFont("helvetica", "bold").setFontSize(16);
+    doc.text(name, centerTextX(name), textY);
+
+    textY += yStep;
+    doc.setFont("helvetica", "normal").setFontSize(12);
+    const contact = `${email} | ${phone}`;
+    doc.text(contact, centerTextX(contact), textY);
+
+    textY += yStep;
+    doc.setTextColor(0, 0, 255);
+    doc.textWithLink(linkedInUrl, centerTextX(linkedInUrl), textY, { url: linkedInUrl });
+
+    textY += yStep;
+    doc.textWithLink(gitHubUrl, centerTextX(gitHubUrl), textY, { url: gitHubUrl });
+    doc.setTextColor(0, 0, 0);
+  };
+
+  const addSummary = (text: string) => {
+    textY += 30;
+    doc.setFont("helvetica", "bold").setFontSize(12);
+    doc.text(text, marginLeft, textY, { maxWidth: marginRight - 20, align: 'left' });
+  };
+
+  const addSkills = (skills: string[]) => {
+    const paddingX = 6, paddingY = 4, radius = 6, fontSize = 10, chipGap = 5;
+    const xStart = marginLeft;
+    const maxLineWidth = doc.internal.pageSize.getWidth() - marginLeft * 2;
+    textY += 80;
+
+    if (icons?.skill) {
+      doc.addImage(icons.skill, 'PNG', marginLeft, textY - iconSize.height + 2, iconSize.width, iconSize.height);
+      doc.text("SKILLS", marginLeft + iconSize.width + gap, textY);
+    } else {
+      doc.text("SKILLS", marginLeft, textY);
     }
 
-    const addSummary = (text: string) => {
-        doc.setTextColor(0, 0, 0);
-        textY += 30;
-        doc.setFont("helvetica", "bold"); 
-        doc.setFontSize(12);
-       doc.text(text, marginLeft, textY, {maxWidth: marginRight - 20, align: 'left'});       
-    }
-    const drawRoundedRect = (
-        doc: jsPDF,
-        x: number,
-        y: number,
-        width: number,
-        height: number,
-        radius: number
-      ) => {
-        doc.roundedRect(x, y, width, height, radius, radius, 'S');
-      };
+    textY += 10;
+    doc.line(marginLeft, textY, marginRight, textY);
+    textY += 5;
+    doc.setFontSize(fontSize);
 
-      
-    const addSkills = (skills: string[]) => {
-        const paddingX = 6;
-        const paddingY = 4;
-        const gap = 5;
-        const radius = 6;
-        const xStart = marginLeft;
-        const maxWidth = doc.internal.pageSize.getWidth() - marginLeft * 2;
-        textY += 80;
-        let x = xStart;
-       
-        if (icons?.school) {
-            doc.addImage(icons?.skill, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
-            doc.text("SKILLS", marginLeft + iconWidth + gap, textY);
-          } else {
-            doc.text("SKILLS", marginLeft, textY);
-          }
-          
-        textY += 5;
-       
-        doc.line(marginLeft, textY, marginRight, textY, "S");
-        const fontSize = 10;
-        doc.setFontSize(fontSize);
-        textY += 5;
-        let y = textY;
-        skills.forEach((skill) => {
-            const textWidth = doc.getTextWidth(skill);
-            const chipWidth = textWidth + paddingX * 2;
-            const chipHeight = fontSize + paddingY * 2;
+    let x = xStart;
+    let y = textY;
 
-            if (x + chipWidth > maxWidth) {
-                x = xStart;
-                y += chipHeight + 8;
-            }
+    skills.forEach((skill) => {
+      const textWidth = doc.getTextWidth(skill);
+      const chipWidth = textWidth + paddingX * 2;
+      const chipHeight = fontSize + paddingY * 2;
 
-        // Draw rounded rectangle (like MUI Chip)
-        doc.setDrawColor(33, 150, 243); // blue border
-        doc.setLineWidth(0.5);
-        drawRoundedRect(doc, x, y, chipWidth, chipHeight, radius);
+      if (x + chipWidth > maxLineWidth) {
+        x = xStart;
+        y += chipHeight + 8;
+      }
 
-        // Draw text centered inside the chip
-        doc.setTextColor(33, 150, 243);
-        doc.text(skill, x + paddingX, y + paddingY + fontSize * 0.75);
+      doc.setDrawColor(33, 150, 243).setLineWidth(0.5);
+      drawRoundedRect(x, y, chipWidth, chipHeight, radius);
 
-        x += chipWidth + gap;
+      doc.setTextColor(33, 150, 243);
+      doc.text(skill, x + paddingX, y + paddingY + fontSize * 0.75);
+      x += chipWidth + chipGap;
     });
 
-        textY = y + fontSize + paddingY * 2; // Update for next section
+    doc.setTextColor(0, 0, 0);
+    textY = y + fontSize + paddingY * 2;
+  };
+
+  const addEducation = (titles: string[]) => {
+    textY += 20;
+    doc.setFont("helvetica", "bold").setFontSize(12);
+
+    if (icons?.school) {
+      doc.addImage(icons.school, 'PNG', marginLeft, textY - iconSize.height + 2, iconSize.width, iconSize.height);
+      doc.text("EDUCATION", marginLeft + iconSize.width + gap, textY);
+    } else {
+      doc.text("EDUCATION", marginLeft, textY);
     }
 
-    const addEducation = (titles: string[]) => {
-        doc.setDrawColor(0, 0, 0); // b
-        doc.setTextColor(0, 0, 0);
-        const ySpace = doc.getFontSize() + 10;
-        textY +=20;
-        doc.setFontSize(12);
-        if (icons?.school) {
-            doc.addImage(icons?.school, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
-            doc.text("EDUCATION", marginLeft + iconWidth + gap, textY);
-          } else {
-            doc.text("EDUCATION", marginLeft, textY);
-          }
+    textY += 10;
+    doc.line(marginLeft, textY, marginRight, textY);
+    doc.setFont("helvetica", "normal");
 
-        textY += 5;
-        doc.line(marginLeft, textY, marginRight, textY, "S");
+    titles.forEach((title) => {
+      textY += 18;
+      doc.text(title, marginLeft, textY);
+    });
+  };
 
-        textY += 5;   
-        doc.setFont("helvetica", "normal"); 
-        titles.forEach((title) => {
-            textY += ySpace;
-            doc.text(title, marginLeft, textY);    
-        });
+  const addExperience = (experience: Experience[]) => {
+    textY += 25;
+    doc.setFont("helvetica", "bold").setFontSize(12);
+
+    if (icons?.work) {
+      doc.addImage(icons.work, 'PNG', marginLeft, textY - iconSize.height + 2, iconSize.width, iconSize.height);
+      doc.text("EXPERIENCE", marginLeft + iconSize.width + gap, textY);
+    } else {
+      doc.text("EXPERIENCE", marginLeft, textY);
     }
 
-    const addExperience = (experience: Experience[]) => {
-        const ySpace = doc.getFontSize()+10;
-        textY += 25;
-        doc.setFont("helvetica", "bold"); 
-        doc.setFontSize(12);
-        if (icons?.work) {
-            doc.addImage(icons?.work, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
-            doc.text("EXPERIENCE", marginLeft + iconWidth + gap, textY);
-          } else {
-            doc.text("EXPERIENCE", marginLeft, textY);
-          }
-      
-        textY += 5;
-        doc.line(marginLeft, textY, marginRight, textY, "S");
-        experience.forEach((item) => {
-           
-           const  {title, company, dates, location, description} = item
-            if(textY > 500) {
-                doc.addPage();
-                textY = margingTop;
-            }
-            textY += ySpace;
-            const titleCompany = `${title} @ ${company} `;
-            doc.setFont("helvetica", "bold"); 
-            doc.setFontSize(12);
+    textY += 10;
+    doc.line(marginLeft, textY, marginRight, textY);
 
-            if (icons?.workOutlined) {
-                doc.addImage(icons?.workOutlined, 'PNG', marginLeft,  textY - iconHeight + 2, iconWidth, iconHeight);
-                doc.text(titleCompany, marginLeft + iconWidth + gap, textY);
-              } else {
-                doc.text(titleCompany, marginLeft, textY);
-              }
-  
-            textY += 10; 
-            const dateLocation = `${dates} | ${location}`;
-            doc.setFont("helvetica", "normal"); 
-            doc.setFontSize(10);
-            doc.text(dateLocation, subMarginLeft, textY);  
-            doc.setFontSize(10);
-            description.forEach((decItem) => {
-                doc.setFont("helvetica", "normal"); 
-                textY += ySpace; 
-                if (icons?.checkBox) {
-                    doc.addImage(icons?.checkBox, 'PNG', subMarginLeft,  textY - iconHeight + 5, iconWidth, iconHeight);
-                    doc.text(decItem, subMarginLeft + iconWidth + gap , textY, {maxWidth: marginRight - 50});
-                  } else {
-                    doc.text(decItem, subMarginLeft, textY);
-                  }
-            });
-        });
-    }
-    const save = () => {
-        doc.save(resumeName);
-    }
+    experience.forEach(({ title, company, dates, location, description }) => {
+      if (textY > 500) {
+        doc.addPage();
+        textY = marginTop;
+      }
 
-    return{
-        addHeader, 
-        addSummary,
-        addSkills,
-        addEducation,
-        addExperience,
-        save
-    };
-}
+      textY += 20;
+      const titleLine = `${title} @ ${company}`;
+      doc.setFont("helvetica", "bold").setFontSize(12);
+
+      if (icons?.workOutlined) {
+        doc.addImage(icons.workOutlined, 'PNG', marginLeft, textY - iconSize.height + 2, iconSize.width, iconSize.height);
+        doc.text(titleLine, marginLeft + iconSize.width + gap, textY);
+      } else {
+        doc.text(titleLine, marginLeft, textY);
+      }
+
+      textY += 10;
+      doc.setFont("helvetica", "normal").setFontSize(10);
+      doc.text(`${dates} | ${location}`, subMarginLeft, textY);
+
+      description.forEach((desc) => {
+        textY += 20;
+        if (icons?.checkBox) {
+          doc.addImage(icons.checkBox, 'PNG', subMarginLeft, textY - iconSize.height + 5, iconSize.width, iconSize.height);
+          doc.text(desc, subMarginLeft + iconSize.width + gap, textY, { maxWidth: marginRight - 50 });
+        } else {
+          doc.text(desc, subMarginLeft, textY);
+        }
+      });
+    });
+  };
+
+  const save = () => doc.save(resumeName);
+
+  return {
+    addHeader,
+    addSummary,
+    addSkills,
+    addEducation,
+    addExperience,
+    save,
+  };
+};
 
 export default useResumePDF;
