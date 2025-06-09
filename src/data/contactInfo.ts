@@ -1,13 +1,6 @@
-export type PersonalInfo = {
-    name: string;
-    email: string;
-    phone: string;
-    linkedInUrl: string;
-    gitHubUrl: string;
+import type { PersonalInfo } from "./types/personalInfo"
 
-  };
-
-  export const personalInfo: PersonalInfo = {
+  export const contactInfo: PersonalInfo = {
     name: 'Jose Semidey',
     email: 'jfsemideys@gmail.com',
     phone: '(315) 854-5189',

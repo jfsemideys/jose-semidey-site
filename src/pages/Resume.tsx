@@ -1,30 +1,29 @@
 // src/pages/Resume.tsx
-import React, {useRef} from 'react';
-import {personalInfo} from '../data/personalInfo'
+import React, {useRef, useEffect, useState} from 'react';
+import {contactInfo} from '../data/contactInfo';
+// import { personalInfo } from '../data/types/personalInfo';
+import { education } from '../data/education';
 import {experience} from '../data/experience';
 import { summary } from '../data/summary';
 import { skills } from '../data/skills';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import {
   Box,
   Typography,
-  Divider,
-  List,
-  ListItem,
-  ListItemText,
-  Chip,
-  Stack,
   Button,
 } from '@mui/material';
 import ResumeBox from '../components/styled-components/ResumeBox';
 import ResumeHeader from '../components/styled-components/ResumeHeader';
 import ExternalLink from '../components/ExternalLink';
-import CheckedListItem from '../components/CheckedListItem';
+import useResumePDF from '../hook/resumePDF';
+import ResumeSummary from '../components/ResumeSummary';
+import ResumeSkills from '../components/ResumeSkills';
+import ResumeEducation from '../components/ResumeEducation';
+import ResumeExperience from '../components/ResumeExperience';
 import SchoolIcon from '@mui/icons-material/School';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import EngineeringOutlinedIcon from '@mui/icons-material/EngineeringOutlined';
-import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { renderMuiIconToBase64 } from '../utils/renderMuiIconToBase64';
 
 const Resume: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -35,40 +34,38 @@ const Resume: React.FC = () => {
     phone,
     linkedInUrl,
     gitHubUrl
-  } = personalInfo;
+  } = contactInfo;
+
+  const [icons, setIcons] = useState<{ [key: string]: string }>();
+  const resumePDF = icons ? useResumePDF('jose semidey resume.pdf', icons) : null;
+
+
+  useEffect(() => {
+    const loadIcons = async () => {
+      const school = await renderMuiIconToBase64(<SchoolIcon style={{ fontSize: 20 }} />);
+      const work = await renderMuiIconToBase64(<EngineeringIcon style={{ fontSize: 20 }} />);
+      const workOutlined = await renderMuiIconToBase64(<EngineeringOutlinedIcon style={{ fontSize: 20 }} />);
+      const checkBox = await renderMuiIconToBase64( 
+        <Box style={{ color: 'green', fontSize: 20 }}>
+          <CheckBoxIcon sx={{ color: 'inherit', fontSize: 'inherit' }} />
+        </Box>);
+      setIcons({ school, work, workOutlined, checkBox });
+    };
+    loadIcons();
+  }, []);
+
 
   const handleDownload = async () => {
-    
-    if (!contentRef.current) return;
+    if (!resumePDF) return null;
 
-    const element = contentRef.current;
-    const canvas = await html2canvas(element, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
+    const {addHeader, addSummary, addEducation, addExperience, save} = resumePDF;
+    addHeader(contactInfo);
+    addSummary(summary);
+    addEducation(education);
+    addExperience(experience);
+    save();
+  }
 
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const margin = 10; // 10 mm margin
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pageWidth - 2 * margin;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-    let position = margin;
-    let heightLeft = pdfHeight;
-
-    pdf.addImage(imgData, 'PNG', margin, position, pdfWidth, pdfHeight);
-    heightLeft -= pageHeight - 2 * margin;
-
-    while (heightLeft > 0) {
-      position = heightLeft - pdfHeight + margin;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', margin, position, pdfWidth, pdfHeight);
-      heightLeft -= pageHeight - 2 * margin;
-    }
-
-    pdf.save('jose-semidey-resume.pdf');
-  };
 
   return (
     <ResumeBox>
@@ -92,66 +89,19 @@ const Resume: React.FC = () => {
            </ExternalLink>
         </ResumeHeader>
         <Box mt={3}>
-          <Typography variant="body1" component="h3" fontWeight="bold" >
-            {summary}
-          </Typography>
-          <Typography variant="h5" sx={{ mt: 4 }}>
-           <BuildCircleIcon/> Skills
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
-          <Stack direction="row" spacing={1} flexWrap="wrap">
-            {skills.map((skill) => (
-              <Chip key={skill} label={skill} color="primary" variant="outlined" sx={{ mb: 1 }} />
-            ))}
-          </Stack>
-          <Typography variant="h5" sx={{ mt: 4 }}>
-            <SchoolIcon /> Education
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
-            <List>
-              <ListItem disablePadding>
-                <ListItemText
-                  primary="Master of Science in Computer Science"
-                />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText
-                  primary="Bachelor of Science in Electrical Engineering"
-                />
-              </ListItem>
-            </List>
-          {/* Experience */}
-          <Typography variant="h5" sx={{ mt: 4 }}>
-          <EngineeringIcon /> Experience
-          </Typography>
-          <Divider sx={{ mb: 2 }} />
-          <List>
-            {experience.map((job, index) => (
-              <ListItem key={index} alignItems="flex-start" sx={{ mb: 2, pageBreakInside: 'avoid',}}>
-                <ListItemText
-                  primary={
-                    <Typography variant="body1" fontWeight="bold">
-                     <EngineeringOutlinedIcon /> {job.title} @ {job.company}
-                    </Typography>
-                  }
-                  secondary={
-                    <>
-                      <Typography variant="body2" color="text.secondary">
-                        {job.dates} | {job.location}
-                      </Typography>
-                      <List>
-                        {job.description.map((text, i) => (
-                          <CheckedListItem text={text} key={`des-${i}`} />
-                        ))}
-                      </List>
-                    </>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
+          <ResumeSummary
+            summary={summary}
+          />
+          <ResumeSkills
+            skills={skills}
+          />
+          <ResumeEducation 
+            titles={education}
+          />
+          <ResumeExperience 
+            experience={experience}
+          />
         </Box>
-        {/* Download Button */}
         <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center'}}>
           <Button
             variant="outlined"
@@ -162,6 +112,8 @@ const Resume: React.FC = () => {
           </Button>
           </Box>
         </Box>
+        <Box>
+    </Box>
     </ResumeBox>
   );
 };

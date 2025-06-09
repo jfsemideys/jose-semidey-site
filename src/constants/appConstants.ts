@@ -11,7 +11,8 @@ export const categories:  { [key: number]: string }  = {
     10: '.NET C#',
     11: 'React',
     12: 'Secutiry',
-    13: 'Social'
+    13: 'Social',
+    14: 'Mobile Game'
 };
 
 export const categoryColor: { [key: number]: string } = {
@@ -27,5 +28,6 @@ export const categoryColor: { [key: number]: string } = {
     10: '#4caf50',
     11: '#1565c0',
     12: '#dd2c00',
-    13: '#546e7a'
+    13: '#546e7a',
+    14: '#3364ff'
 }

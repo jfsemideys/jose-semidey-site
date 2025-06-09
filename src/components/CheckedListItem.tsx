@@ -9,9 +9,9 @@ type CheckedListItemProps = {
     key:string ;
 }
 
-const CheckedListItem:  React.FC<CheckedListItemProps>= ({text, key}) => {
+const CheckedListItem:  React.FC<CheckedListItemProps>= ({text}) => {
   return (
-    <ListItem key={key} alignItems="flex-start" disableGutters sx={{ pl: 1, mb: 0.5 }}>
+    <ListItem alignItems="flex-start" disableGutters sx={{ pl: 1, mb: 0.5 }}>
         <ListItemIcon sx={{ minWidth: 32, color: 'primary.main' }}>
             <CheckBoxIcon fontSize="small" color="success" />
         </ListItemIcon>

@@ -196,7 +196,6 @@ import type {Content} from '../data/types/content'
         'Azure functions are used to get infomation about other applications and rate them',
         'Users also can evaluate the applications using the application',
         'Decision are made such what application to discontinue working, improved etc.'
-
       ]
     },
     {
@@ -211,7 +210,24 @@ import type {Content} from '../data/types/content'
         'Login section.',
         'Schedule appointments.',
         'Practicioner diagnostic and comments',
-        'Patient review,'
+        'Patient review.'
+      ]
+    },
+    {
+      id: 14,
+      title: 'LocoLoop',
+      description:
+        'Mobile Game',
+      tech: ['.NET', 'C#', 'Xamarin', 'Android', 'Sql Server'],
+      categoryId: 14,
+      details: [
+        'Concentric circles appears on the screen changing color and position.',
+        'A counter display the numbers in a regresive manner',
+        'The user tries to click when the counter is 0.',
+        'If the user clicks on time, the user gains points',
+        'The game pace is increments.',
+        'The game score is send to the server to store it.',
+        'The highest score is displayed in the game for reference.'
       ]
     },
   ];
