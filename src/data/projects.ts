@@ -230,5 +230,23 @@ import type {Content} from '../data/types/content'
         'The highest score is displayed in the game for reference.'
       ]
     },
+    {
+      id: 15,
+      title: 'Json to MUI Table',
+      description:
+        'npm package',
+      tech: ['React', 'typescript', 'npm'],
+      categoryId: 16,
+      link: 'https://github.com/jfsemideys/json-to-table-mui',
+      linkName: 'view code in github',
+      details: [
+        'Npm Package to convert any json data to a Mui table.',
+        'The user install it using npm install json-to-table-mui.',
+        'The data is an array json objects or javascript objects. ',
+        'A mui table will be generated.',
+        'Ideal when the structure of the data is not know in a Api response.',
+        'It is a public package.',
+      ]
+    },
   ];
   

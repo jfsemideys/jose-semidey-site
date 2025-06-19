@@ -29,6 +29,28 @@ import type {Content} from '../data/types/content'
       linkName: 'Read on LinkedIn',
       categoryId: 11
     },
-    // Add more as needed
+    {
+      title: 'Best Practices Scalable APIs',
+      description: 'Best Practices for Building Scalable APIs in C# .NET 8',
+      link: 'https://www.linkedin.com/pulse/best-practices-building-scalable-apis-c-net-8-jose-semidey-7fo3c/',
+      linkName: 'Read on LinkedIn',
+      categoryId: 10
+    },
+    {
+      title: 'Why Design Thinking Is Not Just for Designers',
+      description: 'Why Design Thinking Is Not Just for Designers',
+      link: 'https://www.linkedin.com/pulse/why-design-thinking-just-designers-jose-semidey-atcgc',
+      linkName: 'Read on LinkedIn',
+      categoryId: 15
+    },
+    {
+      title: ' json-to-table-mui',
+      description: 'Simplify the process of rendering structured JSON data into responsive Material UI tables',
+      link: 'https://www.linkedin.com/pulse/new-open-source-component-json-to-table-mui-renderer-react-semidey-a9frc/',
+      linkName: 'Read on LinkedIn',
+      categoryId: 16
+    }
   ];
+  
+
   
