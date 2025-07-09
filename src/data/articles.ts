@@ -44,13 +44,35 @@ import type {Content} from '../data/types/content'
       categoryId: 15
     },
     {
-      title: ' json-to-table-mui',
+      title: 'json-to-table-mui',
       description: 'Simplify the process of rendering structured JSON data into responsive Material UI tables',
       link: 'https://www.linkedin.com/pulse/new-open-source-component-json-to-table-mui-renderer-react-semidey-a9frc/',
       linkName: 'Read on LinkedIn',
       categoryId: 16
-    }
+    },
+    {
+      title: 'JWT vs. OAuth2',
+      description: 'Choosing the Right Authentication Strategy',
+      link: 'https://www.linkedin.com/pulse/jwt-vs-oauth2-choosing-right-authentication-strategy-jose-semidey-r7tmc/',
+      linkName: 'Read on LinkedIn',
+      categoryId: 12
+    },
+    {
+      title: 'Optimizing SQL Server Queries',
+      description: 'Optimizing SQL Server Queries for Real-Time Applications',
+      link: 'https://www.linkedin.com/pulse/optimizing-sql-server-queries-real-time-applications-jose-semidey-omlic/',
+      linkName: 'Read on LinkedIn',
+      categoryId: 17
+    },
+    {
+      title: 'Custom Hooks in React',
+      description: 'When and How to Use Them',
+      link: 'https://www.linkedin.com/pulse/custom-hooks-react-when-how-use-them-jose-semidey-02ntc',
+      linkName: 'Read on LinkedIn',
+      categoryId: 11
+    },
   ];
   
 
-  
+
+    
