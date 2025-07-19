@@ -15,7 +15,8 @@ export const categories:  { [key: number]: string }  = {
     14: 'Mobile Game',
     15: 'Tech',
     16: 'NPM',
-    17: 'SQL'
+    17: 'SQL',
+    18: 'AI'
 };
 
 export const categoryColor: { [key: number]: string } = {
@@ -35,5 +36,6 @@ export const categoryColor: { [key: number]: string } = {
     14: '#3364ff',
     15: '#00A36C',
     16: '#D70040',
-    17: '#084894'
+    17: '#084894',
+    18: '#117a65'
 }

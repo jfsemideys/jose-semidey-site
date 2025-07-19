@@ -71,6 +71,13 @@ import type {Content} from '../data/types/content'
       linkName: 'Read on LinkedIn',
       categoryId: 11
     },
+    {
+      title: 'How AI Is Actually Being Used ',
+      description: 'How AI Is Actually Being Used in Software Development (Beyond the Hype)',
+      link: 'https://www.linkedin.com/pulse/how-ai-actually-being-used-software-development-beyond-jose-semidey-5mhpc',
+      linkName: 'Read on LinkedIn',
+      categoryId: 18
+    },
   ];
   
 
