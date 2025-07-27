@@ -248,5 +248,23 @@ import type {Content} from '../data/types/content'
         'It is a public package.',
       ]
     },
+    {
+      id: 16,
+      title: 'JS React Alert Confirm',
+      description:
+        'npm package',
+      tech: ['React', 'typescript', 'npm'],
+      categoryId: 16,
+      link: 'https://github.com/jfsemideys/js-react-alert-confirm',
+      linkName: 'view code in github',
+      details:[
+        'Npm package to show alert and confirm dialogs in React using a simple hook.',
+        'The user installs it using npm install @jfsemideys/js-react-alert-confirm.',
+        'It uses a global JSX-based dialog rendered on demand.',
+        'Alerts and confirms are promise-based and styled with CSS.',
+        'Ideal when you want modern, non-blocking alternatives to window.alert() and window.confirm().',
+        'It is a public package.'
+      ]
+    },
   ];
   

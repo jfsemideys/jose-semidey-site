@@ -78,6 +78,13 @@ import type {Content} from '../data/types/content'
       linkName: 'Read on LinkedIn',
       categoryId: 18
     },
+    {
+      title: 'React Hook for Alert & Confirm Dialogs',
+      description: 'Drop-in React alternative to window.alert() and window.confirm() using a promise-based hook and JSX dialogs.',
+      link: 'https://www.linkedin.com/pulse/better-way-use-alert-confirm-react-meet-jose-semidey-avdzc/?trackingId=BeDaYNhzQPOoxrBhi8UwNg%3D%3D',
+      linkName: 'View on npm',
+      categoryId: 11
+    },
   ];
   
 
